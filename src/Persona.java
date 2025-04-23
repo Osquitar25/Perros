@@ -8,7 +8,7 @@ public class Persona {
     private int edad;
     private String documento;
 
-    public List<Perro> listperro =new ArrayList<>();
+    public List<Perro> listperro;
 
     public Persona() {
     }
@@ -17,7 +17,7 @@ public class Persona {
         this.apellido = apellido;
         this.documento = documento;
         this.edad = edad;
-        this.listperro = listperro;
+        this.listperro = new ArrayList<>();
         this.nombre = nombre;
     }
 
@@ -61,17 +61,36 @@ public class Persona {
         this.nombre = nombre;
     }
 
+    public boolean AdoptarPerro(Perro perro){
+        if (listperro.size()>=3){
+            return false;
+        }else {
+            listperro.add(perro);
+            return true;
+        }
+    }
 
+    public String perroMasGrande(){
 
+        Perro perroviejo=listperro.get(0);
+
+        for (Perro perro: listperro){
+            if (perro.getEdad()> perroviejo.getEdad()){
+                perroviejo=perro;
+            }
+        }
+        System.out.println("El perro mas viejo tiene la edad de: "+perroviejo.getEdad());
+        return perroviejo.getNombre();
+    }
     @Override
     public String toString() {
-        return "Persona{" +
-                "apellido='" + apellido + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", edad=" + edad +
-                ", documento='" + documento + '\'' +
-                ", listperro=" + listperro +
-                '}';
+        return "---------------------------------------------" +
+                "\n||APELLIDO: " + apellido  +
+                "\n||NOMBRE: " + nombre + '\'' +
+                "\n||EDAD: " + edad +
+                "\n||DOCUMENTO: " + documento + '\'' +
+                "\n||LISTA DE PERROS: " + listperro +
+                "\n--------------------------------------------";
     }
 
 }
